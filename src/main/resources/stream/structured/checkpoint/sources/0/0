@@ -1,0 +1,6 @@
+v1
+{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/input/test1.csv","timestamp":1620487976061,"batchId":0}
+{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/input/test5.csv","timestamp":1620487976061,"batchId":0}
+{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/input/test2.csv","timestamp":1620488014242,"batchId":0}
+{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/input/test3.csv","timestamp":1620488014242,"batchId":0}
+{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/input/test4.csv","timestamp":1620490513050,"batchId":0}
