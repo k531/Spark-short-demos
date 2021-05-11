@@ -1,4 +1,4 @@
-package com.spark.example.streaming;
+package com.spark.example.streaming.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Durations;

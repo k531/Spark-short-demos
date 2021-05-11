@@ -1,4 +1,4 @@
-package com.spark.example.streaming;
+package com.spark.example.streaming.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.streaming.Durations;
@@ -13,17 +13,18 @@ import java.util.Arrays;
 public class SparkStreamingWindow {
     public static void main(String[] args) throws InterruptedException {
 
-        // Initialize Spark Streaming Context
+        // 1. Initialize Spark Streaming Context
         SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
         JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1));
 
+        // 2. Init socket stream
         JavaReceiverInputDStream<String> lines = jssc.socketTextStream("localhost", 9999);
 
+        // 3. Operations
         JavaDStream<String> words = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());
 
         JavaPairDStream<String, Integer> pairs = words.mapToPair(s -> new Tuple2<>(s, 1));
         JavaPairDStream<String, Integer> windowedWordCounts = pairs.reduceByKeyAndWindow(Integer::sum, Durations.seconds(30), Durations.seconds(10));
-
 
         windowedWordCounts.print();
 

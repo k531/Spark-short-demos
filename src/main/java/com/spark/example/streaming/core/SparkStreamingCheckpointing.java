@@ -1,4 +1,4 @@
-package com.spark.example.streaming;
+package com.spark.example.streaming.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.function.Function0;
@@ -14,7 +14,10 @@ import java.util.Arrays;
 public class SparkStreamingCheckpointing {
     public static void main(String[] args) throws InterruptedException {
 
-        SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
+        SparkConf conf = new SparkConf()
+                .setMaster("local[2]")
+                .set("spark.stream.receiver.WriteAheadLog.enable", "true")
+                .setAppName("NetworkWordCount");
 
         // Creating Contextfactory
         Function0<JavaStreamingContext> contextFactory = () -> {
@@ -40,7 +43,7 @@ public class SparkStreamingCheckpointing {
         JavaReceiverInputDStream<String> lines = jssc.socketTextStream("localhost", 9999);
 
         // Configuring Checkpoint
-        lines.checkpoint(Durations.seconds(10));
+        lines.checkpoint(Durations.seconds(1));
 
         // Operations
         JavaDStream<String> words = lines.flatMap(x -> Arrays.asList(x.split(" ")).iterator());

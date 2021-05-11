@@ -1,7 +1,6 @@
-package com.spark.example.streaming;
+package com.spark.example.streaming.core;
 
-import com.spark.example.streaming.model.JavaRow;
-import org.apache.parquet.format.StringType;
+import com.spark.example.streaming.core.model.Word;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
@@ -9,10 +8,8 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
-import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import scala.Tuple2;
 
 import java.util.Arrays;
 
@@ -32,12 +29,12 @@ public class SparkStreamingDataframeOperations {
             SparkSession spark = SparkSession.builder().config(rdd.context().getConf()).getOrCreate();
 
             // Convert RDD[String] to RDD[case class] to DataFrame
-            JavaRDD<JavaRow> rowRDD = rdd.map(word -> {
-                JavaRow record = new JavaRow();
+            JavaRDD<Word> rowRDD = rdd.map(word -> {
+                Word record = new Word();
                 record.setWord(word);
                 return record;
             });
-            Dataset<Row> wordsDataFrame = spark.createDataFrame(rowRDD, JavaRow.class);
+            Dataset<Row> wordsDataFrame = spark.createDataFrame(rowRDD, Word.class);
 
             // Creates a temporary view using the DataFrame
             wordsDataFrame.createOrReplaceTempView("words");

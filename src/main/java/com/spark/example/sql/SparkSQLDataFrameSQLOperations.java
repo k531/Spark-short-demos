@@ -28,7 +28,7 @@ public class SparkSQLDataFrameSQLOperations {
         df.createOrReplaceTempView("test");
 
         // 4. Running Spark SQL
-        Dataset<Row> sqlDF = sparkSession.sql("SELECT * FROM test");
+        Dataset<Row> sqlDF = sparkSession.sql("SELECT * FROM test WHERE length(b) > 1");
 
         sqlDF.show();
 

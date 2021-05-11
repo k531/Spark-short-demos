@@ -30,11 +30,10 @@ public class SparkSQLDataSetOperations {
                 .csv("src/main/resources/dogs.csv")
                 .as(dogEncoder);
 
-        ds.filter((FilterFunction<Dog>) dog -> dog.getAge() > 5)
+        Dataset<Dog> filteredDs = ds.filter((FilterFunction<Dog>) dog -> dog.getAge() > 5)
                 .distinct();
 
-        ds.show();
-
+        filteredDs.show();
 
         System.in.read();
         sparkSession.stop();

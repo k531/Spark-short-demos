@@ -12,7 +12,7 @@ import org.apache.spark.sql.streaming.Trigger;
 import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
 
-public class SparkStructuredStreaming {
+public class SparkStructuredStreamingContinues {
     public static void main(String[] args) throws InterruptedException, TimeoutException, StreamingQueryException {
 
         // 1. Initialize Spark Session
@@ -35,13 +35,11 @@ public class SparkStructuredStreaming {
                 .as(Encoders.STRING())
                 .flatMap((FlatMapFunction<String, String>) x -> Arrays.asList(x.split(" ")).iterator(), Encoders.STRING());
 
-        // 2.2 Generate running word count
-        Dataset<Row> wordCounts = words.groupBy("value").count();
 
         // 3. Start running the query that prints the running counts to the console
-        StreamingQuery query = wordCounts.writeStream()
-                .outputMode("complete")
-                .trigger(Trigger.ProcessingTime("1 seconds"))
+        StreamingQuery query = words.writeStream()
+                .outputMode("update")
+                .trigger(Trigger.Continuous(1000))
                 .format("console")
                 .start();
 

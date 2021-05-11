@@ -1,8 +1,8 @@
-package com.spark.example.streaming.model;
+package com.spark.example.streaming.core.model;
 
 import java.io.Serializable;
 
-public class JavaRow implements Serializable {
+public class Word implements Serializable {
     private String word;
 
     public String getWord() {
