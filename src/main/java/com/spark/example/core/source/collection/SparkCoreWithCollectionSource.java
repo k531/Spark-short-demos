@@ -29,7 +29,8 @@ public class SparkCoreWithCollectionSource {
 
 
         // 3 Spark Operations
-        System.out.printf("Result: %d\n", parallelizedRdd.count()); // Action
+        long count = parallelizedRdd.count();
+        System.out.printf("Result: %d\n", count); // Action
 
         System.in.read();
         sc.stop();

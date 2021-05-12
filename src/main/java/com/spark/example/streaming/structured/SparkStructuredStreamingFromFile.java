@@ -47,7 +47,7 @@ public class SparkStructuredStreamingFromFile {
         // 4. Start running the query that prints the running counts to the console
         StreamingQuery query = wordCounts2.writeStream()
                 .format("csv")
-                .trigger(Trigger.ProcessingTime("10 seconds"))
+                .trigger(Trigger.ProcessingTime("1 seconds"))
                 .option("path", "src/main/resources/stream/structured/output")
                 .option("checkpointLocation", "src/main/resources/stream/structured/checkpoint")
                 .start();

@@ -25,9 +25,7 @@ public class SparkCoreWithFileSource {
         // 2  Referencing a dataset in an external storage system
         JavaRDD<String> fileRdd = sc.textFile("src/main/resources/data.csv", 4);
 
-        List<String>[] partitions = fileRdd.collectPartitions(new int[] {0, 1, 2, 3});
-        Map<Integer, List<String>> partitionsByKey = IntStream.range(0, partitions.length).boxed().collect(Collectors.toMap(identity(), index -> partitions[index]));
-        partitionsByKey.forEach((part_index, partition) ->  System.out.printf("Partition %d, content: %s\n", part_index, partition));
+        printPartitionDistribution(fileRdd);
 
         // 3 Spark Operations
         JavaPairRDD<String, Integer> pairs = fileRdd.mapToPair(s -> new Tuple2(s, 1)).cache(); // Transform
@@ -36,9 +34,15 @@ public class SparkCoreWithFileSource {
 
         counts.collect().forEach( count -> System.out.printf("Result: %s: %d\n", count._1, count._2)); // Action
 
-        pairs.saveAsTextFile("spark_core_output");
+        pairs.repartition(1).saveAsTextFile("spark_core_output"); // Action
 
         System.in.read();
         sc.stop();
+    }
+
+    private static void printPartitionDistribution(JavaRDD<String> fileRdd) {
+        List<String>[] partitions = fileRdd.collectPartitions(new int[] {0, 1, 2, 3}); // Action
+        Map<Integer, List<String>> partitionsByKey = IntStream.range(0, partitions.length).boxed().collect(Collectors.toMap(identity(), index -> partitions[index]));
+        partitionsByKey.forEach((part_index, partition) ->  System.out.printf("Partition %d, content: %s\n", part_index, partition));
     }
 }

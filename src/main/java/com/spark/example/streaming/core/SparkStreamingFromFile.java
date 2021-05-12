@@ -15,7 +15,7 @@ public class SparkStreamingFromFile {
 
         // 1. Initialize Spark Streaming Context
         SparkConf conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount");
-        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(10));
+        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(4));
 
         // 2. Init filestream
         JavaDStream<String> lines = jssc.textFileStream("src/main/resources/stream/input");

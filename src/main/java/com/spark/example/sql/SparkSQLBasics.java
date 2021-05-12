@@ -28,7 +28,7 @@ public class SparkSQLBasics {
         Dataset<String> lines =  sparkSession.createDataset(fileRdd, Encoders.STRING());
 
         // 3. Writing out
-        logData.write().partitionBy("b").format("csv").option("sep", "^").mode("overwrite").save("ala.csv");
+        logData.write().partitionBy("b").format("csv").option("sep", "^").mode("overwrite").save("sql_output");
 
         System.in.read();
         sparkSession.stop();

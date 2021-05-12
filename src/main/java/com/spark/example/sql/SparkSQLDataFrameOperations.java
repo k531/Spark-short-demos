@@ -32,14 +32,6 @@ public class SparkSQLDataFrameOperations {
                 .count()
                 .show();
 
-        // 4. Writing out the dataset
-        df.write()
-                .partitionBy("b")
-                .format("csv")
-                .option("sep", "^")
-                .mode("overwrite")
-                .save("ala.csv");
-
         System.in.read();
         sparkSession.stop();
 

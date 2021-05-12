@@ -1,6 +1,0 @@
-v1
-{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/output/part-00000-8dd7dea2-290d-4227-af3d-719161846fac-c000.csv","size":0,"isDir":false,"modificationTime":1620491300136,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/output/part-00010-1ec63d07-9954-4839-996a-d032b3b78ef5-c000.csv","size":37,"isDir":false,"modificationTime":1620491300366,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/output/part-00031-659d1b08-6eca-4b90-afcb-f4020b0b6118-c000.csv","size":39,"isDir":false,"modificationTime":1620491300666,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/output/part-00151-eb5889a6-ff78-43ad-abcb-86c3b58dea67-c000.csv","size":38,"isDir":false,"modificationTime":1620491302466,"blockReplication":1,"blockSize":33554432,"action":"add"}
-{"path":"file:///home/kola/git-repositories/spark_demo/src/main/resources/stream/structured/output/part-00190-94a2ee13-025f-46b7-bf94-390999857fa5-c000.csv","size":36,"isDir":false,"modificationTime":1620491303006,"blockReplication":1,"blockSize":33554432,"action":"add"}
